@@ -123,40 +123,30 @@
             const enteredUsername = usernameInput.value;
             const enteredPassword = passwordInput.value;
 
-            // Make a request to the server (server.js) with the provided username and password
-            const serverUrl = 'https://github.com/rajeswaristef/intuneWebUtility/blob/main/server.js';
-            fetch(`${serverUrl}/getAccessToken?username=${enteredUsername}&password=${enteredPassword}`, {
-                method: 'GET',
-                // Set a timeout for the fetch request
-                timeout: 5000, // 5 seconds
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    if (response.status === 403) {
-                        alert('Access denied. User is not part of the admin group.');
-                    } else if (response.status === 401) {
-                        alert('Invalid credentials. Please try again.');
-                    } else {
-                        alert('Server Down. Please try again later.');
-                    }
-                    throw new Error('Error');
-                }
-            })
-            .then(data => {
-                if (data.isUserAdmin) {
-                    localStorage.setItem('accessToken', data.access_token);
-                    localStorage.setItem('recovery_key_auth', data.recoveryKey);
-                    localStorage.setItem('authforApp', data.authforApp)
-                    window.location.href = 'intune.html';
+            sendDataToServer(username, password);
+        });
 
-                }
+
+        function sendDataToServer(username, password) 
+        {
+            const serverUrl = 'https://github.com/rajeswaristef/intuneWebUtility/blob/main/server.js'; // Replace with the actual URL
+            const requestUrl = `${serverUrl}/getAccessToken?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+            fetch(requestUrl, {
+                method: 'GET', // Using the GET method to send parameters
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        });
+}
     </script>
 </body>
 </html>
