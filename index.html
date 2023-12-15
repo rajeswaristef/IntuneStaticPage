@@ -130,7 +130,7 @@
         function sendDataToServer(username, password) 
         {
             const serverUrl = 'https://github.com/rajeswaristef/intuneWebUtility/blob/main/server.js'; // Replace with the actual URL
-            const requestUrl = `${serverUrl}/getAccessToken?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+            const requestUrl = `${serverUrl}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
             fetch(requestUrl, {
                 method: 'GET', // Using the GET method to send parameters
